@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from './services/auth.service';
 
 
 
@@ -11,7 +12,8 @@ import { Router } from '@angular/router';
 })
 export class AppComponent {
   title = 'visioAngular';
-  constructor(public router: Router) {
-
+  isAuth = false;
+  constructor(public router: Router,public authService : AuthService) {
+    this.isAuth = this.authService.isLoggedIn()
   }
 }

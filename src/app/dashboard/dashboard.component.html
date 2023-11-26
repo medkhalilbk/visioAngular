@@ -1,0 +1,28 @@
+<section class="flex-sect" id="irs5s">
+    <div class="container-width" id="imvxh">
+      <div class="flex-title" id="iwiek">Vos prochaines reunion
+      </div>
+      <div class="flex-desc" id="i18er">Voici vos reunion👇
+      </div>
+      <div class="cards">
+        <ng-template ngFor let-item [ngForOf]="meets" let-i="index">
+         
+        <div class="card">
+            <div class="card-header">
+            </div>
+            <div class="card-body">
+              <div class="card-title">{{item.name}}
+              </div>
+              <div class="card-sub-title">{{item.date}}
+              </div>
+              <div class="card-desc">{{item.description}}
+              </div>
+            </div>
+          </div> 
+          </ng-template>
+
+
+       
+      </div>
+    </div>
+  </section>
