@@ -10,6 +10,8 @@ import { SignupComponent } from './signup/signup.component';
 import { HomeComponent } from './home/home.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { MakeMeetComponent } from './make-meet/make-meet.component';
+import { RoomComponent } from './room/room.component'; 
+import { SocketIoConfig, SocketIoModule } from 'ngx-socket-io';
 
 @NgModule({
   declarations: [
@@ -18,12 +20,14 @@ import { MakeMeetComponent } from './make-meet/make-meet.component';
     SignupComponent,
     HomeComponent,
     DashboardComponent,
-    MakeMeetComponent
+    MakeMeetComponent,
+    RoomComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    NoopAnimationsModule,MatButtonModule,ReactiveFormsModule
+    NoopAnimationsModule, MatButtonModule, ReactiveFormsModule, 
+    SocketIoModule.forRoot({url:"http://localhost:3000",options:{}})
   ],
   providers: [],
   bootstrap: [AppComponent]

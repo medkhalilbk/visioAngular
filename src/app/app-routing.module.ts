@@ -1,3 +1,4 @@
+import { RoomComponent } from './room/room.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './login/login.component';
@@ -11,6 +12,7 @@ const routes: Routes = [
   { path: 'inscription', component: SignupComponent },
   { path: 'dashboard', component: DashboardComponent },
   { path: 'makeMeet', component: MakeMeetComponent },
+  { path: 'room', component: RoomComponent },
   { path: '**', component: HomeComponent }
 ];
 
