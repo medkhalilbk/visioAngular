@@ -22,7 +22,9 @@ export class RoomComponent {
    sendMessage(payload:any): void {
     this.socket.emit('meeting-send', payload);
   }
- 
+   public async makeCall(): Promise<void> {
+    await this.callService.makeCall(this.remoteVideo);
+  }
     private async _handleMessage(data:any): Promise<void> {
     switch (data.type) {
       case 'offer':
