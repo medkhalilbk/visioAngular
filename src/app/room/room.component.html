@@ -1,17 +1,22 @@
-<div class="call-container row">
-    <div class="media-area s-12 m-9 l-10"
-         >
-        <app-video-player *ngIf="localStream"
-                          [mode]="'owner'"
-                          [stream]="localStream"
-                          class="my-video">
-        </app-video-player>
-        <app-video-player *ngFor="let user of joinedUsers"
-                          [stream]="user.stream">
-        </app-video-player>
-    </div>
-    <div [ngClass]="{'hide':isHideChat}"
-         class="chat-container s-12 m-3 l-2">
-    
+<div class="container mt-5">
+    <div class="row">
+
+        <div class="col-md-8">
+            <div class="cameras-container">
+                <app-video-player *ngIf="localStream" [mode]="'owner'" [stream]="localStream" class="my-video"></app-video-player>
+                <app-video-player *ngFor="let user of joinedUsers" [stream]="user.stream"></app-video-player>
+            </div>
+        </div>
+
+       <!--  <div [ngClass]="{'hide': isHideChat}" class="col-md-4">
+            <div class="chat-container bg-light p-3 rounded"> 
+                <h5 class="text-center mb-4">Chat Section</h5>
+                <ul class="list-group">
+                    <li class="list-group-item">User 1: Hello!</li>
+                    <li class="list-group-item">User 2: Hi there!</li> 
+                </ul>
+            </div>
+        </div> -->
+
     </div>
 </div>

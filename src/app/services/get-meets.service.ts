@@ -5,7 +5,7 @@ import { v4 as uuidV4 } from 'uuid';
 })
 export class GetMeetsService { 
 meetsList = [
-  {id:uuidV4(), name: "Daily Meet", date: new Date(), description: "daily meet" },
+  {id:"123", name: "Daily Meet", date: new Date(), description: "daily meet" },
   {id:uuidV4(), name: "Weekly Meet", date: new Date(), description: "weekly meet" },
   {id:uuidV4(), name: "Monthly Meet", date: new Date(), description: "monthly meet" },
   {id:uuidV4(), name: "Team Meet", date: new Date(), description: "team meet" },
