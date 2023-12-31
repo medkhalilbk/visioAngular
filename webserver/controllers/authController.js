@@ -14,7 +14,7 @@ exports.userSignup = async (req, res) => {
     if (UserExist.length > 0) {
       return res.status(400).json({
         error: true,
-        message: "mail already exist"
+        message: "Email est deja utilisé"
       })
     } else {
       const hashedPassword = await bcrypt.hash(req.body.password, 10)
@@ -27,7 +27,7 @@ exports.userSignup = async (req, res) => {
       // send mail to user so he can get verfied
       res.status(200).json({
         success: true,
-        message: 'user signed up successfully',
+        message: 'Votre compte a été crée avec success',
         user: savedUser
       })
     }

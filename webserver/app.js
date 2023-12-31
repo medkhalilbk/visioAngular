@@ -19,7 +19,7 @@ app.use((req, res, next) => {
 app.use(bodyparser.urlencoded({ extended: false }))
 app.use(bodyparser.json())
 
-mongoose.connect('mongodb+srv://zouinekhamine:BLWUnCuXba0kjebc@visiodb.omvjavc.mongodb.net/', {
+mongoose.connect('mongodb+srv://zouinekhamine:BLWUnCuXba0kjebc@visiodb.omvjavc.mongodb.net/visioMPDAM', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 })

@@ -10,10 +10,11 @@ import { AuthService } from '../services/auth.service';
 })
 export class LoginComponent {
   loginForm: FormGroup;
-
+  errorMsg: any;
+  successMsg:any; 
   constructor(private fb: FormBuilder, private router:Router, private authService:AuthService) {
     this.loginForm = this.fb.group({
-      username: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]],
+      username: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
       password: ['', [Validators.required, Validators.minLength(6)]]
     });
   }
@@ -27,14 +28,20 @@ export class LoginComponent {
   }
   onSubmit() {
     console.log(this.loginForm.value)
-    if (this.loginForm.valid) {
-      // Implement your login logic here
-      console.log('Login button clicked!');
-      console.log('Form values:', this.loginForm.value);
-      this.router.navigate(['/dashboard'])
-      this.authService.login()
-    } else {
-      // Mark the form controls as touched to trigger validation messages
+    if (this.loginForm.valid) {   
+      this.authService.login(this.loginForm.value).pipe(
+        ).subscribe(
+         (result:any) => {  
+          console.log(result)
+          this.successMsg = result.message
+         },
+         (err) => {
+          this.errorMsg=err.error.message 
+         }
+       );
+    /*   this.router.navigate(['/dashboard']) */
+   /*    this.authService.login() */
+    } else { 
       this.loginForm.markAllAsTouched();
     }
   }

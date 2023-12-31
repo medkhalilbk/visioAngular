@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, AbstractControl, ValidationErrors } from '@angular/forms';
+import { AuthService } from '../services/auth.service';
+import { Router } from '@angular/router';
 const passwordMatchValidator = (control: AbstractControl): ValidationErrors | null => {
   const password = control.get('password');
   const confirmPassword = control.get('confirmPassword');
@@ -19,8 +21,10 @@ const passwordMatchValidator = (control: AbstractControl): ValidationErrors | nu
 export class SignupComponent {
 
   loginForm: FormGroup;
-
-  constructor(private fb: FormBuilder) {
+  errorMsg = null
+  successMsg = null 
+  timeCounter = 6 
+  constructor(private fb: FormBuilder,private auth:AuthService, private router:Router) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
@@ -47,10 +51,27 @@ export class SignupComponent {
     return this.loginForm.get('fullName');
   }
 
+ redirectionAfterTenSeconds(){
+  setInterval(() => {
+    this.timeCounter=this.timeCounter -1
+    if(this.timeCounter === 0){
+      this.router.navigate(['/connexion'])
+    }
+  }, 1000);
+ }
+
   onSubmit() {
-    if (this.loginForm.valid) { 
-      console.log('Login button clicked!');
-      console.log('Form values:', this.loginForm.value);
+    if (this.loginForm.valid) {  
+      this.auth.signUp(this.loginForm.value).pipe(
+       ).subscribe(
+        (result) => { 
+          this.successMsg = result.message
+          this.redirectionAfterTenSeconds()
+        },
+        (err) => {
+          this.errorMsg=err.error.message 
+        }
+      );
     } else { 
       this.loginForm.markAllAsTouched();
     }
