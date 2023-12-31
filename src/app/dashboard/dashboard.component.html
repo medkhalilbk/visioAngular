@@ -7,7 +7,7 @@
       <div class="cards">
         <ng-template ngFor let-item [ngForOf]="meets" let-i="index">
          
-        <div class="card" [routerLink]="['/room']" [queryParams]="{id:item.id}" >
+        <div class="card" [routerLink]="['/room']" [queryParams]="{roomId:item.id}" >
             <div class="card-header">
             </div>
             <div class="card-body">

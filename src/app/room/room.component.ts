@@ -1,55 +1,93 @@
-import { SignalingService } from './../services/signaling.service';
-import { Component, ElementRef } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Socket } from 'ngx-socket-io';
-import { Observable } from 'rxjs';
-import { ViewChild } from '@angular/core';
-import { CallService } from '../services/call.service';
+import Utils from 'src/app/utils/utils';
+import { CallUser, PeerService } from '../services/peer.service';
+import { SocketService } from '../services/socket.service';
+
 @Component({
   selector: 'app-room',
   templateUrl: './room.component.html',
   styleUrls: ['./room.component.css']
 })
 
-export class RoomComponent {
-  @ViewChild('remoteVideo') remoteVideo!: ElementRef ;
+export class RoomComponent implements OnInit, AfterViewInit {
+ public joinedUsers: CallUser[] = [];
+  public localStream!: MediaStream;
+  public roomId: any ;
+  public isHideChat = true;
 
-  constructor(private route: ActivatedRoute, private socket: Socket, private callService:CallService, private signalingService:SignalingService) { }
-  
- getMessages(): Observable<any> {
-    return this.socket.fromEvent('meeting-recieve');
- }
-   sendMessage(payload:any): void {
-    this.socket.emit('meeting-send', payload);
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    private socketService: SocketService,
+    private peerService: PeerService,) { }
+
+  ngAfterViewInit(): void {
+    this.listenNewUser();
+    this.listenLeavedUser();
+    this.detectScreenWith();
   }
-   public async makeCall(): Promise<void> {
-    await this.callService.makeCall(this.remoteVideo);
+
+  ngOnInit(): void {
+    this.roomId = this.activatedRoute.snapshot.paramMap.get('roomId');
+    Utils.getMediaStream({ video: true, audio: true }).then(stream => {
+      this.localStream = stream;
+      this.openPeer();
+    })
   }
-    private async _handleMessage(data:any): Promise<void> {
-    switch (data.type) {
-      case 'offer':
-        await this.callService.handleOffer(data.offer, this.remoteVideo);
-        break;
 
-      case 'answer':
-        await this.callService.handleAnswer(data.answer);
-        break;
+  hideOrUnhideChat(): void {
+    this.isHideChat = !this.isHideChat;
+  }
 
-      case 'candidate':
-        this.callService.handleCandidate(data.candidate);
-        break;
-
-      default:
-        break;
+  private detectScreenWith(): void {
+    if (window.screen.width > 719) {
+      setTimeout(() => {
+        this.isHideChat = false;
+      }, 200);
     }
-  } 
+  }
 
-  ngOnInit() { 
-    this.signalingService.getMessages().subscribe((payload) => this._handleMessage(payload));
-     this.route.queryParams
-      .subscribe(params => {
-        console.log(params);  
+  private listenNewUser(): void {
+    this.listenNewUserJoinRoom();
+    this.listenNewUserStream();
+  }
+
+  private listenLeavedUser(): void {
+    this.socketService.leavedId.subscribe(userPeerId => {
+      this.joinedUsers = this.joinedUsers.filter(x => x.peerId != userPeerId);
+    })
+  }
+
+  private listenNewUserJoinRoom(): void {
+    this.socketService.joinedId.subscribe(newUserId => {
+      if (newUserId) {
+        this.makeCall(newUserId);
       }
-    );
-  }   
+    })
+  }
+
+  private listenNewUserStream(): void {
+    this.peerService.joinUser.subscribe(user => {
+      if (user) {
+        if (this.joinedUsers.findIndex(u => u.peerId === user.peerId) < 0) {
+          this.joinedUsers.push(user);
+        }
+      }
+    })
+  }
+
+  private openPeer(): void {
+    this.peerService.openPeer(this.localStream).then((myPeerId) => {
+      this.joinRoom(this.roomId, myPeerId);
+    })
+  }
+
+  private makeCall(anotherPeerId: string): void {
+    this.peerService.call(anotherPeerId, this.localStream);
+  }
+
+  private joinRoom(roomId: string, userPeerId: string): void {
+    this.socketService.joinRoom(roomId, userPeerId);
+  }
+
 }

@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, AbstractControl, ValidationErrors } from '@angular/forms';
-
-// Custom validator for matching passwords
 const passwordMatchValidator = (control: AbstractControl): ValidationErrors | null => {
   const password = control.get('password');
   const confirmPassword = control.get('confirmPassword');
@@ -50,12 +48,10 @@ export class SignupComponent {
   }
 
   onSubmit() {
-    if (this.loginForm.valid) {
-      // Implement your login logic here
+    if (this.loginForm.valid) { 
       console.log('Login button clicked!');
       console.log('Form values:', this.loginForm.value);
-    } else {
-      // Mark the form controls as touched to trigger validation messages
+    } else { 
       this.loginForm.markAllAsTouched();
     }
   }

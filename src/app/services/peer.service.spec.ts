@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { SignalingService } from './signaling.service';
+import { PeerService } from './peer.service';
 
-describe('SignalingService', () => {
-  let service: SignalingService;
+describe('PeerService', () => {
+  let service: PeerService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(SignalingService);
+    service = TestBed.inject(PeerService);
   });
 
   it('should be created', () => {
