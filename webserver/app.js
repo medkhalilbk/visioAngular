@@ -3,13 +3,14 @@ const app = express();
 const cors = require('cors');
 const bodyparser = require('body-parser')
 const authRoute = require('./routes/auth.route')
-const meetRoute=require('./routes/meet.route')
+const meetRoute = require("./routes/meet.route");
+const userRoute = require("./routes/user.route");
 const mongoose = require('mongoose');
 const checkAuth = require('./middleware/checkAuth');
 
 app.use(cors({
   origin: '*'
-}));
+}));  
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
@@ -28,6 +29,6 @@ mongoose.connect('mongodb+srv://zouinekhamine:BLWUnCuXba0kjebc@visiodb.omvjavc.m
 
 
 app.use('/auth', authRoute)
-app.use('/meet',checkAuth,meetRoute)
-
+app.use('/meets',checkAuth,meetRoute)
+app.use("/users", checkAuth, userRoute);
 module.exports = app

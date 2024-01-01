@@ -1,9 +1,9 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import Utils from 'src/app/utils/utils';
 import { CallUser, PeerService } from '../services/peer.service';
 import { SocketService } from '../services/socket.service';
-
+ 
 @Component({
   selector: 'app-room',
   templateUrl: './room.component.html',
@@ -11,6 +11,9 @@ import { SocketService } from '../services/socket.service';
 })
 
 export class RoomComponent implements OnInit, AfterViewInit {
+  public animationOption = {
+    path:"./assets/loading_webcam.json"
+  }
  public joinedUsers: CallUser[] = [];
   public localStream!: MediaStream;
   public roomId: any ;

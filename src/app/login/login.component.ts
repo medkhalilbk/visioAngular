@@ -32,8 +32,12 @@ export class LoginComponent {
       this.authService.login(this.loginForm.value).pipe(
         ).subscribe(
          (result:any) => {  
-          console.log(result)
+          this.authService.saveUserInLocalStorage(result)
           this.successMsg = result.message
+            setTimeout(() => {
+            this.authService.setIsAuth()
+            this.router.navigate(['/dashboard'])
+          }, 2000);
          },
          (err) => {
           this.errorMsg=err.error.message 

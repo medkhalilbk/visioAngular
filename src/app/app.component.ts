@@ -13,7 +13,12 @@ import { AuthService } from './services/auth.service';
 export class AppComponent {
   title = 'visioAngular';
   isAuth = false;
+   logout(){
+     this.authService.logout()
+     this.router.navigate(['/connexion'])
+    }
   constructor(public router: Router,public authService : AuthService) {
     this.isAuth = this.authService.isLoggedIn()
+   
   }
 }

@@ -1,19 +1,38 @@
 <section class="flex-sect" id="irs5s">
     <div class="container-width" id="imvxh">
-      <div class="flex-title" id="iwiek">Vos prochaines reunion
+      <div *ngIf="meets.length" class="flex-title" id="iwiek">Vos prochaines reunion
       </div>
-      <div class="flex-desc" id="i18er">Voici vos reunion👇
+      <div *ngIf="meets.length"  class="flex-desc" id="i18er">Voici vos reunion👇
       </div>
-      <div class="cards">
-        <ng-template ngFor let-item [ngForOf]="meets" let-i="index">
+      <ng-template ngFor let-item [ngForOf]="meets" let-i="index">
          
-        <div class="card" [routerLink]="['/room']" [queryParams]="{roomId:item.id}" >
+        <div class="card" [routerLink]="['/room']" [queryParams]="{roomId:item._id}" >
             <div class="card-header">
             </div>
             <div class="card-body">
-              <div class="card-title">{{item.name}}
+              <div class="card-title">{{item.title}}
               </div>
-              <div class="card-sub-title">{{item.date}}
+              <div class="card-sub-title">{{convertDate(item.date)}}   <b style="color:#3f51b5" >{{item.hour}}</b> 
+              </div>
+              <div class="card-desc">{{item.description}}
+              </div>
+            </div>
+          </div> 
+          </ng-template>
+      <div *ngIf="oldMeets.length" class="flex-title" id="iwiek">Vos Anciennes reunion
+      </div>
+      <div  class="flex-desc" id="i18er">Les reunions déja passés 👇
+      </div>
+      <div class="cards">
+        <ng-template ngFor let-item [ngForOf]="oldMeets" let-i="index">
+         
+        <div class="card"  (click)="getRoomInformations(item._id)" >
+            <div class="card-header">
+            </div>
+            <div class="card-body">
+              <div class="card-title">{{item.title}}
+              </div>
+              <div class="card-sub-title">{{convertDate(item.date)}}   <b style="color:#3f51b5" >{{item.hour}}</b> 
               </div>
               <div class="card-desc">{{item.description}}
               </div>

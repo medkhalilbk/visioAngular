@@ -1,3 +1,4 @@
+import { AuthGuard } from './guards/auth.guard';
 import { RoomComponent } from './room/room.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
@@ -10,9 +11,9 @@ import { MakeMeetComponent } from './make-meet/make-meet.component';
 const routes: Routes = [
   { path: 'connexion', component: LoginComponent },
   { path: 'inscription', component: SignupComponent },
-  { path: 'dashboard', component: DashboardComponent },
-  { path: 'makeMeet', component: MakeMeetComponent },
-  { path: 'room', component: RoomComponent },
+  { path: 'dashboard', component: DashboardComponent , canActivate:[AuthGuard] },
+  { path: 'makeMeet', component: MakeMeetComponent , canActivate:[AuthGuard]},
+  { path: 'room', component: RoomComponent , canActivate:[AuthGuard]},
   { path: '**', component: HomeComponent }
 ];
 

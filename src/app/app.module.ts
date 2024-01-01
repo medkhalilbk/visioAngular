@@ -16,7 +16,12 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { MakeMeetComponent } from './make-meet/make-meet.component';
 import { RoomComponent } from './room/room.component';  
 import { VideoPlayerComponent } from './video-player/video-player.component';
-
+import { LottieModule } from 'ngx-lottie';
+import player from 'lottie-web';
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
+export function playerFactory(): any {  
+  return import('lottie-web');
+}
 @NgModule({
   declarations: [
     AppComponent,
@@ -32,7 +37,9 @@ import { VideoPlayerComponent } from './video-player/video-player.component';
     BrowserModule,
     AppRoutingModule,
     NoopAnimationsModule, MatButtonModule, ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    SweetAlert2Module,
+    LottieModule.forRoot({ player: playerFactory }),  
   ],
   providers: [SocketService,PeerService,MediaService],
   bootstrap: [AppComponent]

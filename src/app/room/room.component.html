@@ -4,19 +4,19 @@
         <div class="col-md-8">
             <div class="cameras-container">
                 <app-video-player *ngIf="localStream" [mode]="'owner'" [stream]="localStream" class="my-video"></app-video-player>
+                <div *ngIf="!joinedUsers.length"> 
+                    <div class="lottie-animation ml-5 mx-auto col-12">
+                         
+<h2>En attente de participants...</h2>
+  <ng-lottie
+    [options]="animationOption" 
+    height="400px"
+     >
+  </ng-lottie>
+</div>
+                </div>
                 <app-video-player *ngFor="let user of joinedUsers" [stream]="user.stream"></app-video-player>
             </div>
-        </div>
-
-       <!--  <div [ngClass]="{'hide': isHideChat}" class="col-md-4">
-            <div class="chat-container bg-light p-3 rounded"> 
-                <h5 class="text-center mb-4">Chat Section</h5>
-                <ul class="list-group">
-                    <li class="list-group-item">User 1: Hello!</li>
-                    <li class="list-group-item">User 2: Hi there!</li> 
-                </ul>
-            </div>
-        </div> -->
-
+        </div> 
     </div>
 </div>

@@ -8,6 +8,26 @@ import { Observable } from 'rxjs';
 export class AuthService {
   isAuthenticated = false; 
   serverLink = "http://localhost:3000"
+
+  logout() { 
+    this.isAuthenticated = false
+    localStorage.setItem('token',"")
+    localStorage.setItem('userId', "")
+     
+  }
+  setIsAuth() {
+    this.isAuthenticated = true;
+  }
+  saveUserInLocalStorage(data:any) {
+    localStorage.setItem("token", data.token)
+    localStorage.setItem("userId",data.userId)
+  }
+  getUserIdFromLocalStorage() {
+    return localStorage.getItem('userId')
+  }
+  getTokenFromLocalStorage() {
+    return localStorage.getItem('token')
+  }
   login(user:any){
     try {
       return this.http.post(this.serverLink+"/auth/login", {
@@ -20,12 +40,13 @@ export class AuthService {
     }
 
   }
-  isLoggedIn(){
-    return this.isAuthenticated
+  isLoggedIn() {
+    const token = this.getUserIdFromLocalStorage()
+    return this.isAuthenticated || token !== ""
   }
 signUp(user: any): Observable<any> {
   try {
-    return this.http.post("http://localhost:3000/auth/signup", {
+    return this.http.post(this.serverLink+"/auth/signup", {
       email: user.email,
       name: user.fullName,
       password: user.password

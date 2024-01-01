@@ -25,10 +25,10 @@
       </div>
     </form>
   </div> 
-  <div *ngIf="errorMsg" class="alert mt-2 w-75 mx-auto alert-danger alert-dismissible fade show" role="alert">
+  <div *ngIf="errorMsg && !successMsg" class="alert mt-2 w-75 mx-auto alert-danger alert-dismissible fade show" role="alert">
     <strong>Erreur!</strong> <br> {{errorMsg}}
   </div>
-  <div *ngIf="successMsg" class="alert mt-2 w-75 mx-auto alert-danger alert-dismissible fade show" role="alert">
+  <div *ngIf="successMsg && !errorMsg" class="alert mt-2 w-75 mx-auto alert-danger alert-dismissible fade show" role="alert">
     <strong>Erreur!</strong> <br> {{successMsg}}
   </div>
 </div>

@@ -91,6 +91,10 @@
           <button mat-raised-button color="primary">Creer une Réunion</button>
       
          </a>
+             <a  (click)="this.logout()" class=" mx-5"  *ngIf="this.authService.isLoggedIn() ">
+          <button mat-raised-button color="primary">Se Deconnecter</button>
+      
+         </a>
         </div>
     </div>
   </div>

@@ -10,6 +10,7 @@ exports.createMeet = async (req, res) => {
       title: req.body.title,
       description: req.body.description,
       date: req.body.date,
+      hour:req.body.hour,
       createdBy: userId,
       usersAllowed: req.body.usersAllowed
     })
@@ -19,6 +20,7 @@ exports.createMeet = async (req, res) => {
       data: meet
     })
   } catch (error) {
+    console.log(error)
     res.status(500).json({ error: true, message: 'Could not create the event' });
   }
 }
