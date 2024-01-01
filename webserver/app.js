@@ -4,6 +4,8 @@ const cors = require('cors');
 const bodyparser = require('body-parser')
 const authRoute = require('./routes/auth.route')
 const meetRoute=require('./routes/meet.route')
+const notification=require('./routes/notification.route')
+
 const mongoose = require('mongoose');
 const checkAuth = require('./middleware/checkAuth');
 
@@ -29,5 +31,6 @@ mongoose.connect('mongodb+srv://zouinekhamine:BLWUnCuXba0kjebc@visiodb.omvjavc.m
 
 app.use('/auth', authRoute)
 app.use('/meet',checkAuth,meetRoute)
+app.use('/notif', notification)
 
 module.exports = app

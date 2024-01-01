@@ -15,4 +15,7 @@ export class SignalingService {
   sendMessage(payload:any): void {
     this.socket.emit('send-message', payload);
   }
+  answer(payload:any):void{
+    this.socket.emit('answer', payload);
+  }
 }

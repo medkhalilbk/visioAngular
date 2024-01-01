@@ -53,10 +53,11 @@ export class CallService {
 
     await this.connection.setLocalDescription(answer);
 
-    this.signalingService.sendMessage({ type: 'answer', answer });
+    this.signalingService.answer({ type: 'answer', answer });
   }
 
   public async handleAnswer(answer: RTCSessionDescription): Promise<void> {
+    console.log("handling answer")
     await this.connection.setRemoteDescription(
       new RTCSessionDescription(answer)
     );
