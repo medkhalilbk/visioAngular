@@ -5,7 +5,7 @@ const MeetSchema = new mongoose.Schema({
   date: { type: Date, required: true },
   createdAt: { type: Date, default: Date.now },
   hour:{type:String, required:true} ,
-  usersAllowed:[{type:mongoose.Schema.Types.ObjectId,ref:"User"}],
+  usersAllowed:[{type:String}],
   createdBy:{type:mongoose.Schema.Types.ObjectId,ref:"User"},
   status: { type: String, default: "offline" },
   isDone: { required: false, type: Boolean, default: false }

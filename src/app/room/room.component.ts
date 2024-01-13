@@ -1,3 +1,4 @@
+import { GetMeetsService } from './../services/get-meets.service';
 import { AfterViewInit, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import Utils from 'src/app/utils/utils';
@@ -22,6 +23,7 @@ export class RoomComponent implements OnInit, AfterViewInit {
   constructor(
     private activatedRoute: ActivatedRoute,
     private socketService: SocketService,
+    private meetService:GetMeetsService,
     private peerService: PeerService,) { }
 
   ngAfterViewInit(): void {
@@ -31,7 +33,18 @@ export class RoomComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-    this.roomId = this.activatedRoute.snapshot.paramMap.get('roomId');
+    this.activatedRoute.queryParams.subscribe(params => { 
+      this.roomId = params['roomId']
+      this.meetService.getMeetDetail(params['roomId']).subscribe(
+      (response:any) => { 
+        console.log(response.data)
+      },
+      (error) => {
+        // Handle the error
+        console.error('Error getting meet details:', error);
+      })
+    })
+    
     Utils.getMediaStream({ video: true, audio: true }).then(stream => {
       this.localStream = stream;
       this.openPeer();

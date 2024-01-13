@@ -1,26 +1,69 @@
- 
-    <div id="iz29ek" class="gjs-grid-row">
-      <div id="ik2rdi" class="gjs-grid-column">
-        <h2 id="i83vu9" class="gjs-heading mb-4">Plannifier votre Reunion
-          en <span id="i7owfh" class="gjs-text-blue">quelques clicks </span></h2> 
+<div id="iz29ek" class="gjs-grid-row">
+  <div id="ik2rdi" class="gjs-grid-column">
+    <h2 id="i83vu9" class="gjs-heading mb-4">Plannifier votre Reunion
+      en <span id="i7owfh" class="gjs-text-blue">quelques clicks </span></h2>
+  </div>
+</div>
+<div class="container mt-1" *ngIf="!formSubmitted" >
+  <h2>Project Information</h2>
+  <form [formGroup]="meetingForm" >
+    <div class="form-group">
+      <label for="projectName">Nom:</label>
+      <input type="text" class="form-control" id="projectName" placeholder="Nom de la reunion" formControlName="projectName">
+    </div>
+    <div class="form-group">
+      <label for="projectDate">Date:</label>
+      <input type="date" min='new Date().toISOString().split("T")[0]' class="form-control" id="projectDate" formControlName="projectDate">
+    </div>
+    <div class="form-group">
+      <label for="projectTime">Heure:</label>
+      <input type="time" class="form-control" id="projectTime" formControlName="projectTime">
+    </div>
+
+      <label for="participants" class="mr-2  mt-2">Participants:</label>
+    <div class="form-group row">
+      <div class="col">
+        <input type="participant" #participantsInput class="form-control mr-2 w-75" id="participants" formControlName="participant">
+      </div>
+      <div class="col-4">
+
+      <button mat-raised-button color="primary"  (click)="addParticipant()" class="btn btn-primary mt-2 ml-4">Ajouter</button>
       </div>
     </div>
-    <div class="container mt-1">
-        <h2>Project Information</h2>
-        <form>
-          <div class="form-group">
-            <label for="projectName">Nom:</label>
-            <input type="text" class="form-control" id="projectName" placeholder="Nom de la reunion">
-          </div>
-          <div class="form-group">
-            <label for="projectDate">Date:</label>
-            <input type="date" class="form-control" id="projectDate">
-          </div>
-          <div class="form-group">
-            <label for="projectDescription">Description :</label>
-            <textarea class="form-control" id="projectDescription" rows="3" placeholder="Description de la reunion"></textarea>
-          </div>
-          <button mat-raised-button color="primary" type="submit" class="btn btn-primary mt-2">Enregister</button>
-        </form>
+
+    <div class="form-group">
+      <label for="projectDescription">Description :</label>
+      <textarea class="form-control" id="projectDescription" rows="3" placeholder="Description de la reunion" formControlName="projectDescription"></textarea>
+    </div>
+    <h2 *ngIf="participants.length" > Liste des participants </h2>
+     <div *ngFor="let participant of participants" class="participant-item mt-5">
+    <div class=" row ">
+      <div class="col">
+      <strong> 👤 {{ participant }}</strong>  
       </div>
-  
+      <div class="col">
+           <button class="btn btn-danger" (click)="removeParticipant(participant)">Remove</button>
+      </div>
+    </div>
+ 
+  </div> 
+    <button mat-raised-button color="primary" type="submit" (click)="ajouterReunion()" class="btn btn-primary mt-2">Enregistrer</button>
+  </form> 
+<div *ngIf="errorMsg" class="alert alert-danger" role="alert">
+  Vérifier vos informations! 
+</div>
+</div>
+
+<div class="main-container" *ngIf="formSubmitted" >
+        <h2 id="i83vu9" class="gjs-heading mb-4">Votre meet a été crée </h2>
+	<div class="check-container mx-auto">
+		<div class="check-background">
+			<svg viewBox="0 0 65 51" fill="none" xmlns="http://www.w3.org/2000/svg">
+				<path d="M7 25L27.3077 44L58.5 7" stroke="white" stroke-width="13" stroke-linecap="round" stroke-linejoin="round" />
+			</svg>
+		</div>
+
+		<div class="check-shadow"></div>
+
+	</div>
+</div>

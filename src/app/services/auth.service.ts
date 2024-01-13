@@ -41,8 +41,8 @@ export class AuthService {
 
   }
   isLoggedIn() {
-    const token = this.getUserIdFromLocalStorage()
-    return this.isAuthenticated || token !== ""
+    const token = this.getUserIdFromLocalStorage() 
+    return this.isAuthenticated || token !== null
   }
 signUp(user: any): Observable<any> {
   try {

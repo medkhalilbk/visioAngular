@@ -18,6 +18,8 @@ import { RoomComponent } from './room/room.component';
 import { VideoPlayerComponent } from './video-player/video-player.component';
 import { LottieModule } from 'ngx-lottie';
 import player from 'lottie-web';
+import { FormsModule } from '@angular/forms';
+
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 export function playerFactory(): any {  
   return import('lottie-web');
@@ -39,6 +41,7 @@ export function playerFactory(): any {
     NoopAnimationsModule, MatButtonModule, ReactiveFormsModule,
     HttpClientModule,
     SweetAlert2Module,
+    FormsModule,
     LottieModule.forRoot({ player: playerFactory }),  
   ],
   providers: [SocketService,PeerService,MediaService],

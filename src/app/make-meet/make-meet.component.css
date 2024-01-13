@@ -151,3 +151,7 @@
 	flex-direction:column;
 }
 }
+.participant-details {
+	flex: 1;
+}
+

@@ -4,10 +4,7 @@ const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const express = require('express')
 const path = require('path')
-require('dotenv').config();
-
-
-
+require('dotenv').config(); 
 exports.userSignup = async (req, res) => {
   try {
     const UserExist = await User.find({ email: req.body.email }).exec()
@@ -23,8 +20,7 @@ exports.userSignup = async (req, res) => {
         email: req.body.email,
         password: hashedPassword
       })
-      const savedUser = await user.save()
-      // send mail to user so he can get verfied
+      const savedUser = await user.save() 
       res.status(200).json({
         success: true,
         message: 'Votre compte a été crée avec success',

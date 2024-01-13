@@ -5,7 +5,7 @@ const meetModel = require("../models/meets");
 
 exports.getMeetsByUserId = async (req, res) => {
     try {
-        const {userId} = req.userData    
+        const { userId, email } = req.userData;    
     if (userId != req.params.userId) {
         return res.status(500).json({
             success: false,
@@ -13,7 +13,7 @@ exports.getMeetsByUserId = async (req, res) => {
     })    
     }
     const meets = await meetModel.find({
-      $or: [{ usersAllowed: { $in: [userId] } } , {createdBy:userId}],
+      $or: [{ usersAllowed: { $in: [email] } }, { createdBy: userId }],
     });
     res.status(200).json({
       success: true,
