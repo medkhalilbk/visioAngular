@@ -1,27 +1,49 @@
-# VisioAngular
+# Academic Project: Minified Google Meet using WebSocket & WebRTC
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.5.
+## Project Overview
 
-## Development server
+This academic project replicates a **Google Meet-like** video conferencing system but in a **minified version** using **WebSocket** and **WebRTC**. The project demonstrates real-time video and audio communication with an Angular-based frontend and a lightweight backend for signaling.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Features
 
-## Code scaffolding
+- **Real-time Communication**: Peer-to-peer audio/video calls using WebRTC.
+- **WebSocket Signaling**: Establish and manage connections between users.
+- **Minimal UI**: Simple and efficient user interface built with Angular.
+- **Room Management**: Users can create or join meeting rooms.
+- **Screen Sharing**: Basic screen-sharing functionality.
+- **Chat System**: In-call text-based messaging.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Technologies Used
 
-## Build
+### Frontend:
+- Angular 15+
+- TypeScript
+- HTML5, CSS3, SCSS
+- WebRTC API
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+### Backend:
+- Node.js / Express.js
+- WebSocket for real-time signaling
 
-## Running unit tests
+## Usage Instructions
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+- Create or join a meeting room via the UI.
+- Allow camera and microphone access when prompted.
+- Start video/audio communication with other participants.
+- Use the chat for text-based communication.
+- Optionally, share your screen with others.
 
-## Running end-to-end tests
+## Future Enhancements
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+- Implement authentication for secure meetings.
+- Enable multi-user calls with improved session management.
+- Improve UI with additional customization options.
+- Add recording functionality.
 
-## Further help
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+## 👥 Open for Contributions
+
+We're always looking to improve! Whether you're looking to fix a bug, add a new feature, or improve the UI, feel free to fork the project and submit a pull request. 
+
+ 
+ 
